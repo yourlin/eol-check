@@ -9,11 +9,11 @@ import concurrent.futures
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 
-from end_of_life_checker.api.endoflife_client import EndOfLifeClient
-from end_of_life_checker.parsers import get_parsers_for_project
-from end_of_life_checker.utils.cache import Cache
-from end_of_life_checker.utils.logger import debug, info, warning, error
-from end_of_life_checker.utils.request_pool import RequestPool
+from eol_check.api.endoflife_client import EndOfLifeClient
+from eol_check.parsers import get_parsers_for_project
+from eol_check.utils.cache import Cache
+from eol_check.utils.logger import debug, info, warning, error
+from eol_check.utils.request_pool import RequestPool
 
 
 class EOLChecker:
@@ -197,7 +197,7 @@ class EOLChecker:
                                         recommended_version = latest_active.get("latest")
                                         
                                         # Check if this is a major version change
-                                        from end_of_life_checker.utils.version import has_major_version_change
+                                        from eol_check.utils.version import has_major_version_change
                                         if recommended_version and has_major_version_change(dep["version"], recommended_version):
                                             has_breaking_changes = True
                                     else:

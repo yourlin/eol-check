@@ -43,7 +43,7 @@ End of Life Checker helps developers identify outdated dependencies in their pro
 ### From PyPI (Recommended)
 
 ```bash
-pip install end-of-life-checker
+pip install eol-check
 ```
 
 ### From Source
@@ -52,8 +52,8 @@ For the latest development version or to contribute to the project:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/end-of-life-checker.git
-cd end-of-life-checker
+git clone https://github.com/yourlin/eol-check.git
+cd eol-check
 
 # Install in development mode
 pip install -e .
@@ -170,8 +170,8 @@ jobs:
         with:
           python-version: '3.10'
           
-      - name: Install end-of-life-checker
-        run: pip install end-of-life-checker
+      - name: Install eol-check
+        run: pip install eol-check
         
       - name: Check dependencies
         run: eol-check . --format json --output eol-report.json

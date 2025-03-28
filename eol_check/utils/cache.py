@@ -7,7 +7,7 @@ import os
 import time
 from typing import Any, Dict, Optional
 
-from end_of_life_checker.utils.logger import debug, info
+from eol_check.utils.logger import debug, info
 
 
 class Cache:
@@ -17,11 +17,11 @@ class Cache:
         """Initialize the cache.
         
         Args:
-            cache_dir: Directory to store cache files. Defaults to ~/.cache/end-of-life-checker/
+            cache_dir: Directory to store cache files. Defaults to ~/.cache/eol-check/
         """
         if cache_dir is None:
             home_dir = os.path.expanduser("~")
-            cache_dir = os.path.join(home_dir, ".cache", "end-of-life-checker")
+            cache_dir = os.path.join(home_dir, ".cache", "eol-check")
         
         self.cache_dir = cache_dir
         

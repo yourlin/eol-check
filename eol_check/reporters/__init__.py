@@ -4,11 +4,11 @@ Report generators for different output formats.
 
 from typing import Dict, Any
 
-from end_of_life_checker.reporters.base import BaseReporter
-from end_of_life_checker.reporters.text import TextReporter
-from end_of_life_checker.reporters.json_reporter import JsonReporter
-from end_of_life_checker.reporters.csv_reporter import CsvReporter
-from end_of_life_checker.reporters.html_reporter import HtmlReporter
+from eol_check.reporters.base import BaseReporter
+from eol_check.reporters.text import TextReporter
+from eol_check.reporters.json_reporter import JsonReporter
+from eol_check.reporters.csv_reporter import CsvReporter
+from eol_check.reporters.html_reporter import HtmlReporter
 
 
 def get_reporter(format_name: str) -> BaseReporter:

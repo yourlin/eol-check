@@ -8,7 +8,7 @@ import re
 import subprocess
 from typing import Dict, List, Any, Set
 
-from end_of_life_checker.parsers.base import BaseParser
+from eol_check.parsers.base import BaseParser
 
 
 class NpmParser(BaseParser):

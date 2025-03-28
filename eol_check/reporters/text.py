@@ -5,7 +5,7 @@ Text reporter for generating plain text reports.
 from datetime import datetime, timedelta
 from typing import Dict, Any
 
-from end_of_life_checker.reporters.base import BaseReporter
+from eol_check.reporters.base import BaseReporter
 
 
 class TextReporter(BaseReporter):

@@ -43,7 +43,7 @@ End of Life Checker 帮助开发者识别项目中可能带来安全风险或兼
 ### 从 PyPI 安装（推荐）
 
 ```bash
-pip install end-of-life-checker
+pip install eol-check
 ```
 
 ### 从源代码安装
@@ -52,8 +52,8 @@ pip install end-of-life-checker
 
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/end-of-life-checker.git
-cd end-of-life-checker
+git clone https://github.com/yourlin/eol-check.git
+cd eol-check
 
 # 以开发模式安装
 pip install -e .
@@ -157,8 +157,8 @@ jobs:
         with:
           python-version: '3.10'
           
-      - name: 安装 end-of-life-checker
-        run: pip install end-of-life-checker
+      - name: 安装 eol-check
+        run: pip install eol-check
         
       - name: 检查依赖
         run: eol-check . --format json --output eol-report.json

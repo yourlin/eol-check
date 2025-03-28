@@ -3,7 +3,7 @@
 Main entry point for the End of Life Checker.
 """
 
-from end_of_life_checker.cli import main
+from eol_check.cli import main
 
 if __name__ == "__main__":
     main()

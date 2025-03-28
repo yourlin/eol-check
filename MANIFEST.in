@@ -1,4 +1,4 @@
 include LICENSE
 include README.md
 include README_zh.md
-recursive-include end_of_life_checker/data *
+recursive-include eol_check/data *

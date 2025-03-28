@@ -5,7 +5,7 @@ HTML reporter for generating HTML reports.
 from datetime import datetime
 from typing import Dict, Any
 
-from end_of_life_checker.reporters.base import BaseReporter
+from eol_check.reporters.base import BaseReporter
 
 
 class HtmlReporter(BaseReporter):

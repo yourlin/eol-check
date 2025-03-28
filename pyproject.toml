@@ -1,3 +1,47 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "eol-check"
+version = "0.1.0"
+authors = [
+    {name = "Lin Ye", email = "31615967@qq.com"},
+]
+description = "A tool to check the end-of-life status of software dependencies"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Software Distribution",
+]
+keywords = ["dependency", "eol", "end-of-life", "security", "maintenance", "java", "python", "nodejs"]
+dependencies = [
+    "requests>=2.25.0",
+    "toml>=0.10.2",
+]
+
+[project.urls]
+"Bug Tracker" = "https://github.com/yourlin/eol-check/issues"
+"Documentation" = "https://github.com/yourlin/eol-check"
+"Source Code" = "https://github.com/yourlin/eol-check"
+
+[project.scripts]
+eol-check = "eol_check.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+packages = ["eol_check"]
+license-files = ["LICENSE"]

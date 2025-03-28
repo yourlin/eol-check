@@ -8,9 +8,9 @@ import sys
 from datetime import datetime
 from typing import Optional
 
-from end_of_life_checker.core import EOLChecker
-from end_of_life_checker.reporters import get_reporter
-from end_of_life_checker.utils.logger import configure_logger, info, error, debug
+from eol_check.core import EOLChecker
+from eol_check.reporters import get_reporter
+from eol_check.utils.logger import configure_logger, info, error, debug
 
 
 def parse_cache_ttl(value: str) -> int:

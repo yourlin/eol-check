@@ -10,7 +10,7 @@ from typing import Dict, List, Any, Set
 
 import toml
 
-from end_of_life_checker.parsers.base import BaseParser
+from eol_check.parsers.base import BaseParser
 
 
 class PipParser(BaseParser):
@@ -253,9 +253,25 @@ class PoetryParser(BaseParser):
         processed_deps = set()  # To avoid duplicates
         
         try:
+            # Check if we're in a Poetry project first
+            if not os.path.exists(os.path.join(self.project_path, "poetry.lock")):
+                print("No poetry.lock file found, skipping Poetry dependency resolution")
+                return []
+                
             # Run poetry show command
             cmd = ["poetry", "show", "--no-ansi"]
-            result = subprocess.run(cmd, cwd=self.project_path, capture_output=True, text=True, check=True)
+            try:
+                result = subprocess.run(
+                    cmd, 
+                    cwd=self.project_path, 
+                    capture_output=True, 
+                    text=True, 
+                    check=True
+                )
+            except subprocess.CalledProcessError as e:
+                print(f"Poetry command failed: {e}")
+                print(f"Poetry stderr: {e.stderr}")
+                return []
             
             # Parse the output
             lines = result.stdout.splitlines()
@@ -281,7 +297,7 @@ class PoetryParser(BaseParser):
                         })
                 
                 # Dependencies of the current package
-                elif current_package and "└──" in line or "├──" in line:
+                elif current_package and ("└──" in line or "├──" in line):
                     dep_match = re.search(r"[└├]──\s+([a-zA-Z0-9_.-]+)\s+([0-9a-zA-Z.-]+)", line)
                     if dep_match:
                         name, version = dep_match.groups()

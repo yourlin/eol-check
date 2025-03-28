@@ -9,9 +9,9 @@ from typing import Dict, Optional, Any, List
 
 import requests
 
-from end_of_life_checker.utils.cache import Cache
-from end_of_life_checker.utils.logger import debug, info, warning, error
-from end_of_life_checker.utils.version import normalize_version
+from eol_check.utils.cache import Cache
+from eol_check.utils.logger import debug, info, warning, error
+from eol_check.utils.version import normalize_version
 
 
 class EndOfLifeClient:

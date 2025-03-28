@@ -5,10 +5,10 @@ Parsers for different project types.
 import os
 from typing import List, Optional
 
-from end_of_life_checker.parsers.base import BaseParser
-from end_of_life_checker.parsers.java import MavenParser, GradleParser
-from end_of_life_checker.parsers.nodejs import NpmParser, YarnParser
-from end_of_life_checker.parsers.python import PipParser, PoetryParser, PipenvParser
+from eol_check.parsers.base import BaseParser
+from eol_check.parsers.java import MavenParser, GradleParser
+from eol_check.parsers.nodejs import NpmParser, YarnParser
+from eol_check.parsers.python import PipParser, PoetryParser, PipenvParser
 
 
 def get_parsers_for_project(project_path: str) -> List[BaseParser]:

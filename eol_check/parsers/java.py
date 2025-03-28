@@ -8,7 +8,7 @@ import subprocess
 import xml.etree.ElementTree as ET
 from typing import Dict, List, Any, Optional, Set
 
-from end_of_life_checker.parsers.base import BaseParser
+from eol_check.parsers.base import BaseParser
 
 
 class MavenParser(BaseParser):

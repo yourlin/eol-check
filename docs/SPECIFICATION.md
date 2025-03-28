@@ -89,7 +89,7 @@ End of Life Checker 将使用 endoflife.date 提供的 API 获取软件生命周
 
 ### 4.4 数据缓存
 
-- 缓存位置: `~/.cache/end-of-life-checker/`
+- 缓存位置: `~/.cache/eol-check/`
 - 缓存格式: JSON 文件
 - 默认缓存有效期: 7 天
 
@@ -158,7 +158,7 @@ Details:
 ### 6.1 项目结构
 
 ```
-end_of_life_checker/
+eol_check/
 ├── __init__.py
 ├── __main__.py
 ├── cli.py
