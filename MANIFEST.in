@@ -1,3 +1,4 @@
-include README.md
 include LICENSE
-recursive-include end_of_life_checker *.py
+include README.md
+include README_zh.md
+recursive-include end_of_life_checker/data *

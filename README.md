@@ -1,10 +1,21 @@
 # End of Life Checker
 
+[English](README.md) | [中文](README_zh.md)
+
 A command-line tool to check the end-of-life (EOL) status of software dependencies in your projects by comparing them with data from [endoflife.date](https://endoflife.date/).
+
+> **Special Note**: This tool was developed entirely with the assistance of Amazon Q CLI, showcasing the capabilities of AI-assisted development.
 
 ## Overview
 
 End of Life Checker helps developers identify outdated dependencies in their projects that may pose security risks or compatibility issues. The tool scans project files to detect dependencies and their versions, then checks them against the EOL data to provide alerts and recommendations.
+
+## Requirements
+
+- Python 3.8 or higher
+- Required packages (automatically installed):
+  - requests>=2.25.0
+  - toml>=0.10.2
 
 ## Features
 
@@ -29,9 +40,39 @@ End of Life Checker helps developers identify outdated dependencies in their pro
 
 ## Installation
 
+### From PyPI (Recommended)
+
 ```bash
 pip install end-of-life-checker
 ```
+
+### From Source
+
+For the latest development version or to contribute to the project:
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/end-of-life-checker.git
+cd end-of-life-checker
+
+# Install in development mode
+pip install -e .
+```
+
+Installing from source allows you to modify the code and immediately see the effects without reinstalling.
+
+### Publishing to PyPI
+
+For maintainers who want to publish a new version to PyPI:
+
+```bash
+# Update version in setup.py first
+python -m build
+twine check dist/*
+twine upload dist/*
+```
+
+Alternatively, create a new release on GitHub to trigger the automated publishing workflow.
 
 ## Usage
 
