@@ -516,7 +516,20 @@ def run_ui():
 
 def main():
     """Entry point for the UI."""
-    run_ui()
+    import sys
+    import subprocess
+    import os
+    
+    # Get the path to the current script
+    script_path = os.path.abspath(__file__)
+    
+    # Launch streamlit with the current script
+    cmd = ["streamlit", "run", script_path]
+    try:
+        subprocess.run(cmd)
+    except FileNotFoundError:
+        print("Error: Streamlit not found. Please install it with 'pip install streamlit numpy<2.0.0'")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

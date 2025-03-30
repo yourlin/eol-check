@@ -32,6 +32,7 @@ dependencies = [
     "requests>=2.25.0",
     "toml>=0.10.2",
     "streamlit>=1.22.0",
+    "numpy<2.0.0",  # 限制 NumPy 版本以确保与 PyArrow 兼容
 ]
 
 [project.urls]
