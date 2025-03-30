@@ -116,6 +116,7 @@ class EOLChecker:
                 "critical": 0,
                 "warning": 0,
                 "ok": 0,
+                "unknown": 0,
             }
         }
         
@@ -161,7 +162,7 @@ class EOLChecker:
                             "eol_date": None,
                             "days_remaining": None,
                             "recommended_version": None,
-                        }, "ok"
+                        }, "unknown"
                     else:
                         eol_date = datetime.strptime(eol_info["eol"], "%Y-%m-%d").date()
                         days_remaining = (eol_date - today).days
@@ -222,7 +223,7 @@ class EOLChecker:
                         **dep,
                         "status": "ERROR",
                         "error": str(e),
-                    }, "ok"
+                    }, "unknown"
             
             # Show progress message
             info(f"Checking {total_deps} dependencies...")

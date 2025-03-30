@@ -69,6 +69,7 @@ class TextReporter(BaseReporter):
         critical_count = summary.get("critical", 0)
         warning_count = summary.get("warning", 0)
         ok_count = summary.get("ok", 0)
+        unknown_count = summary.get("unknown", 0)
         
         if critical_count > 0:
             lines.append(f"{self.STATUS_EMOJIS['CRITICAL']} {critical_count} dependencies have reached end of life")
@@ -78,8 +79,11 @@ class TextReporter(BaseReporter):
         
         if ok_count > 0:
             lines.append(f"{self.STATUS_EMOJIS['OK']} {ok_count} dependencies are up to date")
+            
+        if unknown_count > 0:
+            lines.append(f"{self.STATUS_EMOJIS['UNKNOWN']} {unknown_count} dependencies have unknown EOL status")
         
-        if critical_count == 0 and warning_count == 0 and ok_count == 0:
+        if critical_count == 0 and warning_count == 0 and ok_count == 0 and unknown_count == 0:
             lines.append("No dependencies found or analyzed")
         
         lines.append("")

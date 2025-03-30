@@ -73,11 +73,14 @@ class EndOfLifeClient:
             
         Returns:
             Data as dictionary
+            
+        Raises:
+            requests.HTTPError: If the API request fails
         """
         url = f"{self.BASE_URL}/{endpoint}"
         debug(f"Fetching from API: {url}")
         response = requests.get(url)
-        response.raise_for_status()
+        response.raise_for_status()  # This will raise an exception for 404s and other errors
         return response.json()
     
     def _get_with_cache(self, endpoint: str) -> Dict[str, Any]:
@@ -88,6 +91,10 @@ class EndOfLifeClient:
             
         Returns:
             Data as dictionary
+            
+        Raises:
+            ValueError: If offline mode is enabled and no cached data is available
+            requests.HTTPError: If the API request fails
         """
         # Remove .json extension if it's in the endpoint to avoid double extension in cache key
         if endpoint.endswith(".json"):
@@ -116,12 +123,21 @@ class EndOfLifeClient:
             raise ValueError(error_msg)
         
         # Fetch from API
-        data = self._fetch_from_api(endpoint)
-        
-        # Update cache
-        self.cache.set(cache_key, data, ttl=self.cache_ttl)
-        
-        return data
+        try:
+            data = self._fetch_from_api(endpoint)
+            
+            # Update cache with successful response
+            self.cache.set(cache_key, data, ttl=self.cache_ttl)
+            return data
+            
+        except requests.HTTPError as e:
+            # If it's a 404 error, cache the negative result
+            if e.response.status_code == 404:
+                debug(f"Product {endpoint} not found (404), caching negative result")
+                # We'll cache an empty dict to indicate the product doesn't exist
+                self.cache.set(cache_key, {}, ttl=self.cache_ttl)
+            # Re-raise the exception
+            raise
     
     def _get_product_name(self, package_name: str) -> str:
         """Get the product name for a package.
@@ -156,17 +172,33 @@ class EndOfLifeClient:
         Returns:
             True if the product is available, False otherwise
         """
-        # Check cache first
+        # Check in-memory cache first
         if product_name in self.available_products_cache:
             return self.available_products_cache[product_name]
+        
+        # Check persistent cache for negative results
+        cache_key = f"eol_api_product_availability_{product_name}"
+        cached_availability = self.cache.get(cache_key)
+        
+        if cached_availability is not None:
+            # We found a cached result about product availability
+            self.available_products_cache[product_name] = cached_availability
+            debug(f"Using cached product availability for {product_name}: {'available' if cached_availability else 'not available'}")
+            return cached_availability
         
         try:
             # Try to fetch product info
             self._get_with_cache(product_name)
+            # Product exists, cache the positive result
             self.available_products_cache[product_name] = True
+            self.cache.set(cache_key, True, ttl=self.cache_ttl)
+            debug(f"Product {product_name} is available, cached result")
             return True
         except Exception:
+            # Product doesn't exist, cache the negative result
             self.available_products_cache[product_name] = False
+            self.cache.set(cache_key, False, ttl=self.cache_ttl)
+            debug(f"Product {product_name} is not available, cached negative result")
             return False
     
     def get_product_versions(self, product_name: str) -> List[Dict[str, Any]]:
@@ -202,6 +234,11 @@ class EndOfLifeClient:
             # Get all versions for the product
             versions = self.get_product_versions(product_name)
             
+            # If versions is empty (cached negative result), return None
+            if not versions:
+                debug(f"No version information available for {product_name}")
+                return None
+                
             # Normalize the version for comparison
             normalized_version = normalize_version(version)
             

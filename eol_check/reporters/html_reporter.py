@@ -33,6 +33,7 @@ class HtmlReporter(BaseReporter):
         critical_count = summary.get("critical", 0)
         warning_count = summary.get("warning", 0)
         ok_count = summary.get("ok", 0)
+        unknown_count = summary.get("unknown", 0)
         
         # Start building HTML
         html = []
@@ -75,8 +76,11 @@ class HtmlReporter(BaseReporter):
         
         if ok_count > 0:
             html.append(f"    <p class=\"ok\">OK: {ok_count} dependencies are up to date</p>")
+            
+        if unknown_count > 0:
+            html.append(f"    <p>UNKNOWN: {unknown_count} dependencies have unknown EOL status</p>")
         
-        if critical_count == 0 and warning_count == 0 and ok_count == 0:
+        if critical_count == 0 and warning_count == 0 and ok_count == 0 and unknown_count == 0:
             html.append("    <p>No dependencies found or analyzed</p>")
         
         html.append("  </div>")

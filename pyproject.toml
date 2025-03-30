@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "eol-check"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
     {name = "Lin Ye", email = "31615967@qq.com"},
 ]
