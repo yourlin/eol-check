@@ -520,15 +520,25 @@ def main():
     import subprocess
     import os
     
-    # Get the path to the current script
-    script_path = os.path.abspath(__file__)
-    
-    # Launch streamlit with the current script
-    cmd = ["streamlit", "run", script_path]
     try:
+        # Try to import streamlit first to check if it's available
+        import streamlit
+        
+        # If we're already running in streamlit, just run the UI
+        if streamlit._is_running_with_streamlit:
+            run_ui()
+            return
+        
+        # Otherwise, launch streamlit with this script
+        script_path = os.path.abspath(__file__)
+        cmd = ["streamlit", "run", script_path]
         subprocess.run(cmd)
-    except FileNotFoundError:
+        
+    except ImportError:
         print("Error: Streamlit not found. Please install it with 'pip install streamlit numpy<2.0.0'")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error launching UI: {e}")
         sys.exit(1)
 
 
