@@ -31,6 +31,7 @@ keywords = ["dependency", "eol", "end-of-life", "security", "maintenance", "java
 dependencies = [
     "requests>=2.25.0",
     "toml>=0.10.2",
+    "streamlit>=1.22.0",
 ]
 
 [project.urls]

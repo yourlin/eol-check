@@ -88,6 +88,12 @@ With options:
 eol-check /path/to/project --format json --output report.json --threshold 180
 ```
 
+Launch the graphical user interface:
+
+```bash
+eol-check --ui
+```
+
 ## Options
 
 - `--format`: Output format (text, json, csv, html). Default: text
@@ -99,6 +105,7 @@ eol-check /path/to/project --format json --output report.json --threshold 180
 - `--verbose`: Show detailed information about the checking process, including API availability messages and debug output
 - `--ignore-file`: Path to file containing dependencies to ignore (one dependency name per line)
 - `--max-workers`: Maximum number of parallel workers for API requests (default: CPU count * 2)
+- `--ui`: Launch the graphical user interface
 
 ### Ignore File Format
 

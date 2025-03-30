@@ -58,6 +58,7 @@ def parse_args():
     )
     parser.add_argument(
         "project_path",
+        nargs="?",
         help="Path to the project directory to check",
     )
     parser.add_argument(
@@ -107,6 +108,11 @@ def parse_args():
         type=int,
         help="Maximum number of parallel workers for API requests (default: CPU count * 2)",
     )
+    parser.add_argument(
+        "--ui",
+        action="store_true",
+        help="Launch the graphical user interface",
+    )
     
     return parser.parse_args()
 
@@ -114,6 +120,22 @@ def parse_args():
 def main():
     """Main entry point for the CLI."""
     args = parse_args()
+    
+    # Launch UI if requested
+    if args.ui:
+        try:
+            from eol_check.ui import main as ui_main
+            ui_main()
+            return
+        except ImportError:
+            error("Could not import streamlit. Please install it with 'pip install streamlit'.")
+            sys.exit(1)
+    
+    # Ensure project path is provided for CLI mode
+    if not args.project_path:
+        error("Project path is required when not using the UI mode.")
+        error("Use 'eol-check /path/to/project' or 'eol-check --ui' to launch the UI.")
+        sys.exit(1)
     
     # Configure logger based on verbose flag
     configure_logger(verbose=args.verbose)
