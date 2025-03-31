@@ -16,6 +16,8 @@ End of Life Checker helps developers identify outdated dependencies in their pro
 - Required packages (automatically installed):
   - requests>=2.25.0
   - toml>=0.10.2
+  - streamlit>=1.22.0
+  - numpy<2.0.0
 
 ## Features
 
@@ -27,6 +29,7 @@ End of Life Checker helps developers identify outdated dependencies in their pro
   - Node.js (npm, yarn)
   - Python (pip, poetry, pipenv)
 - Command-line interface for easy integration into CI/CD pipelines
+- Graphical user interface for interactive usage
 - Detailed reports showing:
   - Dependencies approaching EOL
   - Dependencies that have reached EOL
@@ -147,6 +150,16 @@ For Java projects, the tool analyzes the complete dependency tree including:
 - Dependencies from dependency management sections
 
 This ensures you get alerts about EOL status for all libraries your application actually uses, not just the ones you directly declare.
+
+### Graphical User Interface
+
+The tool provides a user-friendly Streamlit-based GUI that can be launched with the `--ui` parameter:
+- Project selection and scanning
+- Interactive dependency analysis results
+- Cache management interface
+- About section with project information
+
+The GUI makes it easy for non-technical users to check their project dependencies without needing to use command-line options.
 
 ### CI/CD Integration
 
