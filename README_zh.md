@@ -16,6 +16,8 @@ End of Life Checker 帮助开发者识别项目中可能带来安全风险或兼
 - 所需包（自动安装）：
   - requests>=2.25.0
   - toml>=0.10.2
+  - streamlit>=1.22.0
+  - numpy<2.0.0
 
 ## 功能特点
 
@@ -27,6 +29,7 @@ End of Life Checker 帮助开发者识别项目中可能带来安全风险或兼
   - Node.js (npm, yarn)
   - Python (pip, poetry, pipenv)
 - 命令行界面，易于集成到 CI/CD 流水线
+- 图形用户界面，便于交互使用
 - 详细的报告显示：
   - 接近 EOL 的依赖
   - 已达到 EOL 的依赖
@@ -75,6 +78,12 @@ eol-check /path/to/project
 eol-check /path/to/project --format json --output report.json --threshold 180
 ```
 
+启动图形用户界面：
+
+```bash
+eol-check --ui
+```
+
 ## 选项
 
 - `--format`：输出格式（text, json, csv, html）。默认：text
@@ -86,6 +95,7 @@ eol-check /path/to/project --format json --output report.json --threshold 180
 - `--verbose`：显示有关检查过程的详细信息，包括 API 可用性消息和调试输出
 - `--ignore-file`：包含要忽略的依赖项的文件路径（每行一个依赖项名称）
 - `--max-workers`：API 请求的最大并行工作线程数（默认：CPU 核心数 * 2）
+- `--ui`：启动图形用户界面
 
 ### 忽略文件格式
 
@@ -127,6 +137,16 @@ enterprise-framework
 - 来自依赖管理部分的依赖
 
 这确保你能获得关于应用程序实际使用的所有库的 EOL 状态警报，而不仅仅是你直接声明的库。
+
+### 图形用户界面
+
+该工具提供了一个用户友好的基于 Streamlit 的 GUI，可以通过 `--ui` 参数启动：
+- 项目选择和扫描
+- 交互式依赖分析结果
+- 缓存管理界面
+- 关于项目的信息部分
+
+GUI 使非技术用户更容易检查其项目依赖，无需使用命令行选项。
 
 ### CI/CD 集成
 
